@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>현대홈쇼핑 - 현대Hmall PC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Malgun Gothic', sans-serif;
+            background: #f5f5f5;
+            min-width: 1200px;
+        }
+        
+        /* Header */
+        .header {
+            background: white;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .header-top {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .logo-badge {
+            background: linear-gradient(135deg, #00c6c6, #0099ff);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+        
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+        
+        .nav-main {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        
+        .nav-main a {
+            text-decoration: none;
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+            padding: 5px 0;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+        
+        .nav-main a:hover {
+            color: #ff6b6b;
+            border-bottom-color: #ff6b6b;
+        }
+        
+        .nav-main a.highlight {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+        
+        .icon-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 24px;
+            color: #666;
+        }
+        
+        /* Main Content */
+        .main-container {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr 350px 280px;
+            gap: 20px;
+        }
+        
+        /* Left: Main Banner */
+        .main-banner {
+            background: linear-gradient(135deg, #ffd4d4, #ffe4e4);
+            border-radius: 12px;
+            padding: 40px;
+            position: relative;
+            min-height: 450px;
+            overflow: hidden;
+        }
+        
+        .banner-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .banner-title {
+            font-size: 32px;
+            font-weight: bold;
+            color: #333;
+            line-height: 1.4;
+            margin-bottom: 10px;
+        }
+        
+        .banner-subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .banner-products {
+            display: flex;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        
+        .banner-product-img {
+            width: 80px;
+            height: 80px;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        /* Center: Search & Live */
+        .center-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .search-box {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .search-input-wrapper {
+            display: flex;
+            border: 2px solid #333;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .search-input {
+            flex: 1;
+            border: none;
+            padding: 12px 15px;
+            font-size: 14px;
+            outline: none;
+        }
+        
+        .search-btn {
+            background: #333;
+            border: none;
+            padding: 0 20px;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+        }
+        
+        .realtime-keywords {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .section-title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .keyword-list {
+            list-style: none;
+        }
+        
+        .keyword-item {
+            padding: 8px 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .keyword-rank {
+            font-weight: bold;
+            color: #333;
+            min-width: 20px;
+        }
+        
+        .keyword-text {
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+        }
+        
+        .live-products {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .live-badge {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .live-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .live-item-title {
+            font-size: 13px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .live-item-price {
+            font-size: 14px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        /* Right: Recommended Products */
+        .right-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .category-icons {
+            background: white;
+            border-radius: 12px;
+            padding: 15px;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+        }
+        
+        .category-icon {
+            text-align: center;
+            padding: 10px 5px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .category-icon:hover {
+            background: #f5f5f5;
+        }
+        
+        .category-icon-img {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto 5px;
+            background: #f0f0f0;
+            border-radius: 50%;
+        }
+        
+        .category-icon-text {
+            font-size: 11px;
+            color: #666;
+        }
+        
+        .recommended-products {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .product-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        .product-img {
+            width: 100%;
+            aspect-ratio: 1;
+            background: #f5f5f5;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .product-name {
+            font-size: 12px;
+            color: #333;
+            margin-bottom: 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+        
+        .product-price {
+            font-size: 14px;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+        
+        .product-discount {
+            font-size: 11px;
+            color: #ff6b6b;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .qr-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+        }
+        
+        .qr-code {
+            width: 120px;
+            height: 120px;
+            background: #f0f0f0;
+            margin: 15px auto;
+            border-radius: 8px;
+        }
+        
+        .qr-title {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .qr-subtitle {
+            font-size: 12px;
+            color: #666;
+        }
+        
+        /* Broadcasting Section */
+        .broadcasting-section {
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+        
+        .broadcasting-header {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        
+        .broadcasting-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            display: grid;
+            grid-template-columns: 400px 1fr;
+            gap: 30px;
+        }
+        
+        .broadcast-video {
+            position: relative;
+            background: #000;
+            border-radius: 8px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+        }
+        
+        .live-indicator {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #ff6b6b;
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        
+        .broadcast-time {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(0,0,0,0.7);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+        }
+        
+        .broadcast-info {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .broadcast-tag {
+            display: inline-block;
+            background: #ffe4e4;
+            color: #ff6b6b;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            margin-bottom: 10px;
+            width: fit-content;
+        }
+        
+        .broadcast-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .broadcast-price-box {
+            margin: 20px 0;
+        }
+        
+        .broadcast-discount {
+            font-size: 24px;
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+        
+        .broadcast-price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #333;
+            margin-left: 10px;
+        }
+        
+        .broadcast-original {
+            font-size: 14px;
+            color: #999;
+            text-decoration: line-through;
+            margin-left: 10px;
+        }
+        
+        .buy-btn {
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: auto;
+            width: fit-content;
+        }
+        
+        .buy-btn:hover {
+            background: #ff5252;
+        }
+        
+        /* Login Popup */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .popup-content {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            max-width: 400px;
+        }
+        
+        .popup-title {
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+        
+        .popup-subtitle {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 25px;
+        }
+        
+        .popup-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .popup-btn {
+            flex: 1;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: bold;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .popup-btn-primary {
+            background: #ff6b6b;
+            color: white;
+        }
+        
+        .popup-btn-secondary {
+            background: #f0f0f0;
+            color: #333;
+        }
+        
+        .popup-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-top">
+            <div class="logo">
+                <span class="logo-badge">현대홈쇼핑</span>
+                <span class="logo-text">Hmall</span>
+                <button class="icon-btn">☰</button>
+            </div>
+            
+            <nav class="nav-main">
+                <a href="#">카테고리</a>
+                <a href="#" class="highlight">라이브</a>
+                <a href="#">라인업</a>
+                <a href="#" class="highlight">현대홈쇼핑</a>
+                <a href="#">백화점</a>
+                <a href="#">아울렛</a>
+                <a href="#">명품</a>
+                <a href="#">혜택</a>
+                <a href="#">현장표</a>
+            </nav>
+            
+            <div class="header-icons">
+                <button class="icon-btn">👤</button>
+                <button class="icon-btn">📋</button>
+                <button class="icon-btn">🛒</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Left: Main Banner -->
+        <div class="main-banner">
+            <span class="banner-badge">WWbeauty</span>
+            <h1 class="banner-title">천바람이 불어도<br>끝끝 진 듯<br>매끈 피부 안성</h1>
+            <p class="banner-subtitle">라이온홈쇼핑 특집방송</p>
+            <div class="banner-products">
+                <div class="banner-product-img"></div>
+                <div class="banner-product-img"></div>
+                <div class="banner-product-img"></div>
+            </div>
+        </div>
+
+        <!-- Center: Search & Live -->
+        <div class="center-column">
+            <div class="search-box">
+                <div class="search-input-wrapper">
+                    <input type="text" class="search-input" placeholder="실시간 인기 검색어">
+                    <button class="search-btn">🔍</button>
+                </div>
+            </div>
+
+            <div class="realtime-keywords">
+                <h3 class="section-title">
+                    실시간 인기 검색어
+                    <span style="font-size: 12px; color: #999;">2024.11.13 08:30</span>
+                </h3>
+                <ul class="keyword-list">
+                    <li class="keyword-item">
+                        <span class="keyword-rank">1</span>
+                        <span class="keyword-text">LG</span>
+                    </li>
+                    <li class="keyword-item">
+                        <span class="keyword-rank">2</span>
+                        <span class="keyword-text">아이언 터스틱 월마트</span>
+                    </li>
+                    <li class="keyword-item">
+                        <span class="keyword-rank">3</span>
+                        <span class="keyword-text">더플탄수컵용세트</span>
+                    </li>
+                    <li class="keyword-item">
+                        <span class="keyword-rank">4</span>
+                        <span class="keyword-text">내숫피</span>
+                    </li>
+                    <li class="keyword-item">
+                        <span class="keyword-rank">5</span>
+                        <span class="keyword-text">어깨비기부분</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="live-products">
+                <span class="live-badge">LIVE 상품</span>
+                <div class="live-item">
+                    <div>
+                        <div class="live-item-title">[라이어비] 프로젝트 딥도스 일품 12팩+가지...</div>
+                        <div class="live-item-price">9% 288,000원</div>
+                    </div>
+                </div>
+                <div class="live-item">
+                    <div>
+                        <div class="live-item-title">[라이어비] 프로젝트 딥도스 일품 12팩+가지...</div>
+                        <div class="live-item-price">9% 288,000원</div>
+                    </div>
+                </div>
+                <div class="live-item">
+                    <div>
+                        <div class="live-item-title">[라이어비] 프로젝트 딥도스 일품 12팩+가지...</div>
+                        <div class="live-item-price">9% 288,000원</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Recommended Products -->
+        <div class="right-column">
+            <div class="category-icons">
+                <div class="category-icon">
+                    <div class="category-icon-img"></div>
+                    <div class="category-icon-text">럭셔리</div>
+                </div>
+                <div class="category-icon">
+                    <div class="category-icon-img"></div>
+                    <div class="category-icon-text">뷰티</div>
+                </div>
+                <div class="category-icon">
+                    <div class="category-icon-img"></div>
+                    <div class="category-icon-text">패션</div>
+                </div>
+                <div class="category-icon">
+                    <div class="category-icon-img"></div>
+                    <div class="category-icon-text">생활/건강</div>
+                </div>
+                <div class="category-icon">
+                    <div class="category-icon-img"></div>
+                    <div class="category-icon-text">푸드/가전</div>
+                </div>
+            </div>
+
+            <div class="recommended-products">
+                <h3 class="section-title">첫 구매 고객에게 가장 많이 한 상품</h3>
+                <div class="product-grid">
+                    <div class="product-card">
+                        <div class="product-img"></div>
+                        <div class="product-name">스타벅스 아메리카노 선물세트</div>
+                        <div class="product-price">
+                            <span class="product-discount">15%</span>26,900원
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img"></div>
+                        <div class="product-name">카운터 정수기 12개월</div>
+                        <div class="product-price">
+                            <span class="product-discount">15%</span>14,790원
+                        </div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img"></div>
+                        <div class="product-name">명품 선물세트 패키지</div>
+                        <div class="product-price">84,900원</div>
+                    </div>
+                    <div class="product-card">
+                        <div class="product-img"></div>
+                        <div class="product-name">스타벅스 원두 세트</div>
+                        <div class="product-price">71,900원</div>
+                    </div>
+                </div>
+                <div style="text-align: center; margin-top: 15px;">
+                    <span style="font-size: 14px; color: #666;">1 / 1</span>
+                </div>
+            </div>
+
+            <div class="qr-section">
+                <div class="qr-title">Hmall 빠른가기</div>
+                <div class="qr-subtitle">앱으로 더 편리하게<br>쇼핑하세요</div>
+                <div class="qr-code"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Broadcasting Section -->
+    <div class="broadcasting-section">
+        <h2 class="broadcasting-header">지금 방송 중</h2>
+        <div class="broadcasting-card">
+            <div class="broadcast-video">
+                <span class="live-indicator">HI TV</span>
+                <span class="broadcast-time">00:30:43</span>
+            </div>
+            
+            <div class="broadcast-info">
+                <span class="broadcast-tag">Talk</span>
+                <h3 class="broadcast-title">[라이어비] 프로젝트 딥도스 일품 12팩+가지 블랜드커피캡슐</h3>
+                
+                <div class="broadcast-price-box">
+                    <span class="broadcast-discount">9%</span>
+                    <span class="broadcast-price">288,000원</span>
+                    <span class="broadcast-original">316,000원</span>
+                </div>
+                
+                <p style="font-size: 13px; color: #666; margin-bottom: 15px;">
+                    최대 무12 | 무료배송 | 10%적립
+                </p>
+                
+                <button class="buy-btn">구매하기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Popup -->
+    <div id="loginPopup" class="popup-overlay">
+        <div class="popup-content" style="position: relative;">
+            <button class="popup-close" onclick="closePopup()">×</button>
+            <h2 class="popup-title">처음 오셨나요?</h2>
+            <p class="popup-subtitle">로그인하고 혜택받아 쇼핑하세요!</p>
+            <div class="popup-buttons">
+                <button class="popup-btn popup-btn-primary" onclick="alert('로그인 페이지로 이동')">로그인하고 쇼핑하기</button>
+                <button class="popup-btn popup-btn-secondary" onclick="closePopup()">둘러보기</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function closePopup() {
+            document.getElementById('loginPopup').classList.add('hidden');
+        }
+        
+        // Show popup on load
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loginPopup').classList.remove('hidden');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
